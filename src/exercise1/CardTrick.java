@@ -1,4 +1,6 @@
 package exercise1;
+import java.util.Random;
+import java.util.Scanner;
 
 /**
  * A class that fills a hand of 7 cards with random Card Objects and then asks the user to pick a card.
@@ -15,7 +17,35 @@ public class CardTrick {
         Card[] hand = new Card[7];
 
         for (int i = 0; i < hand.length; i++) {
-            Card card = new Card();
+        hand[i] = new Card();
+        hand[i].setValue((int) (1 + Math.random() * 13));
+        Random rand = new Random();
+        int randomSuitIndex = rand.nextInt(4);
+        hand[i].setSuit(Card.SUITS[randomSuitIndex]);
+    }
+
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("Enter the value of the card (1-13): ");
+    int value = scanner.nextInt();
+    System.out.print("Enter the suit of the card (1-4): ");
+    int suitIndex = scanner.nextInt() - 1;
+    String suit = Card.SUITS[suitIndex];
+
+    for (Card card : hand) {
+        if (card.getValue() == value && card.getSuit().equals(suit)) {
+            printInfo(); // invoke the printInfo() method
+            break;
+        }
+    }
+    
+}
+    private static void printInfo() {
+    
+        System.out.println("Congratulations, you guessed right!");
+        System.out.println();
+        }
+            // 
+        }
             //card.setValue(insert call to random number generator here)
             // 
             //card.setSuit(Card.SUITS[insert call to random number between 0-3 here])
